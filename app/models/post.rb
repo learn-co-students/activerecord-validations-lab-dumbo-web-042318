@@ -13,9 +13,10 @@ class Post < ActiveRecord::Base
         clickbait = ["Won't Believe", "Secret", "Top", "Guess"]
         var = clickbait.any? do |bait|
             title.include?(bait)
+        end 
+        
+        if var == false
+            errors.add(:title, "this shit broken")
         end
-        # if var == false
-        #     errors.add(:title, "this shit broken")
-        # end
     end
 end
