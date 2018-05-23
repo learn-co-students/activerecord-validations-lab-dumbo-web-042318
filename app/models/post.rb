@@ -4,7 +4,18 @@ validates :content, length: {minimum: 250}
 validates :summary, length: {maximum: 250}
 validates :category, inclusion: {in: %w(Fiction Non-Fiction)}
 
-validates :non_clickbait, title: {in: %w(Won't Believe Secret Top[number] Guess)}
+validates :is_clickbait, acceptance: true
+
+ def is_clickbait
+   return false if self.title.nil?
+   if self.title.match(/(Won't Believe)|(Secret)|(Top \d)|Guess/)
+     # return trues
+   else
+     return false
+   end
+ end
+
+
 
 
 end
