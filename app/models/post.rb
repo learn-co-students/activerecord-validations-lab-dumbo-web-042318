@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
     validates :content, length: {minimum: 250}
     validates :summary, length: {maximum: 250}
     validates :category, inclusion: { in: %w(Fiction Non-fiction)}
-    validate :clickbait_y
+    validates :clickbait_y, acceptance: true
 
     def clickbait_y
         return false if title.nil?
@@ -14,8 +14,8 @@ class Post < ActiveRecord::Base
         var = clickbait.any? do |bait|
             title.include?(bait)
         end
-        if var == false
-            errors.add(:title, "this shit broken")
-        end
+        # if var == false
+        #     errors.add(:title, "this shit broken")
+        # end
     end
 end
